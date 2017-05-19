@@ -1,0 +1,28 @@
+{
+  "name": "generator-node-base-service",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "compile": "rm -fr generators && tsc",
+    "lint": "tslint -c tslint.json src/**/*.ts"
+  },
+  "files": [
+    "generators"
+  ],
+  "author": "",
+  "license": "MIT",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.18",
+    "@types/tape": "^4.2.30",
+    "@types/yeoman-generator": "^1.0.2",
+    "tape": "^4.6.3",
+    "tslint": "^5.2.0",
+    "typescript": "^2.3.2"
+  }
+}

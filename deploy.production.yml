@@ -1,0 +1,31 @@
+version: '3'
+services:
+
+  <%= name %>:
+    image: registry.repositive.io:5000/<%= name %>:${TAG}
+    environment:
+
+    networks:
+      - <%= name %>
+
+    deploy:
+      replicas: 2
+      resources:
+        limit:
+          memory: 200M
+          cpus: '0.3'
+        reservations:
+          memory: 100M
+          cpus: '0.1'
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        window: 30s
+      placement:
+        constraints:
+          - node.labels.functional==true
+
+networks:

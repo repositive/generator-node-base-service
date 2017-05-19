@@ -1,0 +1,27 @@
+{
+  "name": "<%= name %>",
+  "version": "0.0.1",
+  "description": "<%= description %>",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "start": "node dist/main",
+    "compile": "rm -fr dist && tsc",
+    "lint": "tslint -c tslint.json src/**/*.ts",
+    "test": "nyc tape dist/test/**/*.js | tap-spec",
+    "coverage": "nyc check-coverage --lines 80 --functions 80 --branches 80"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ]
+  },
+  "author": "Repositive Team",
+  "license": "MIT",
+  "keywords": ["<%= name %>", "service"],
+  "dependencies": {},
+  "devDependencies": {}
+}
