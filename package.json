@@ -18,6 +18,7 @@
     "yeoman-generator": "^1.1.1"
   },
   "devDependencies": {
+    "@repositive/typescript": "^1.1.2",
     "@types/node": "^7.0.18",
     "@types/tape": "^4.2.30",
     "@types/yeoman-generator": "^1.0.2",
