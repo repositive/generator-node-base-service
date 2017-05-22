@@ -64,7 +64,7 @@ class AppGen extends Generator {
     );
 
     this.fs.copy(
-      this.templatePath(`${basePath}/.gitignore`),
+      this.templatePath(`${basePath}/gitignore`),
       this.destinationPath('.gitignore')
     );
   }
