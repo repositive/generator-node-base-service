@@ -7,7 +7,7 @@
     "start": "node dist/main",
     "make": "rm -fr dist && tsc",
     "lint": "tslint -c tslint.json src/**/*.ts",
-    "test": "nyc tape dist/test/**/*.js | tap-spec",
+    "test": "nyc tape $(find dist -name '*.js' ! -name 'index.js') | tap-spec",
     "coverage": "nyc check-coverage --lines 80 --functions 80 --branches 80"
   },
   "nyc": {
