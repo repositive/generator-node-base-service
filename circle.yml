@@ -5,10 +5,13 @@ machine:
 dependencies:
   pre:
     - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+  override:
+    - npm install
+    - npm run make
 
 test:
   override:
-    - echo "skip"
+    - npm run lint
 
 deployment:
   npm:
