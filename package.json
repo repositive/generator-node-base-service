@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "compile": "rm -fr generators && tsc",
+    "make": "rm -fr generators && tsc",
     "lint": "tslint -c tslint.json src/**/*.ts"
   },
   "files": [

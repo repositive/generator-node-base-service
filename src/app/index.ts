@@ -71,11 +71,9 @@ class AppGen extends Generator {
       'tape',
       'tap-spec',
       '@types/tape',
-      'nyc'
-      //'@repositive/typescript'
+      'nyc',
+      '@repositive/typescript'
     ], {'save-dev': true});
-
-    this.spawnCommand('npm', ['link', '@repositive/typescript']);
   }
 
   git() {

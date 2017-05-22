@@ -11,7 +11,7 @@ This is a [yeoman](http://yeoman.io) generator intended provide the basic setup 
     - TsLint
     - Istanbul
 - NPM Scripts:
-    - compile
+    - make
     - lint
     - test
     - coverage
