@@ -1,13 +1,14 @@
 {
   "name": "@repositive/generator-node-base-service",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "scripts": {
     "make": "rm -fr generators && tsc",
     "lint": "tslint -c tslint.json src/**/*.ts"
   },
   "files": [
-    "generators"
+    "generators",
+    "templates"
   ],
   "author": "",
   "license": "MIT",
