@@ -1,5 +1,5 @@
 {
-  "name": "generator-node-base-service",
+  "name": "@repositive/generator-node-base-service",
   "version": "1.0.0",
   "description": "",
   "scripts": {

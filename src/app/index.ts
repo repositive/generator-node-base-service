@@ -34,6 +34,12 @@ class AppGen extends Generator {
       {name: this.name, description: this.description}
     );
 
+    this.fs.copyTpl(
+      `${basePath}/circle.yml`,
+      this.destinationPath('circle.yml'),
+      {name: this.name}
+    );
+
     this.fs.copy(
       this.templatePath(`${basePath}/src/main/index.ts`),
       this.destinationPath('src/main/index.ts'),
