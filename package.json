@@ -1,6 +1,6 @@
 {
   "name": "@repositive/generator-node-base-service",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "scripts": {
     "make": "rm -fr generators && tsc",
