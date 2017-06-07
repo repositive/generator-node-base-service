@@ -40,6 +40,12 @@ class AppGen extends Generator {
       {name: this.name}
     );
 
+    this.fs.copyTpl(
+      `${basePath}/docker-compose.yml`,
+      this.destinationPath('docker-compose.yml'),
+      {name: this.name}
+    );
+
     this.fs.copy(
       this.templatePath(`${basePath}/src/main/index.ts`),
       this.destinationPath('src/main/index.ts'),
@@ -78,7 +84,8 @@ class AppGen extends Generator {
       'tap-spec',
       '@types/tape',
       'nyc',
-      '@repositive/typescript'
+      '@repositive/typescript',
+      'nodemon'
     ], {'save-dev': true});
   }
 

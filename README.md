@@ -10,11 +10,14 @@ This is a [yeoman](http://yeoman.io) generator intended provide the basic setup 
     - Tape
     - TsLint
     - Istanbul
+    - Nodemon
 - NPM Scripts:
     - make
     - lint
     - test
     - coverage
+    - start
+    - startDev
 
 **Installing with NPM**
 ```bash
