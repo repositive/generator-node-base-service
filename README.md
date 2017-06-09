@@ -8,9 +8,12 @@ This is a [yeoman](http://yeoman.io) generator intended provide the basic setup 
 - Dependencies:
     - Typescript
     - Tape
+    - Sinon
     - TsLint
     - Istanbul
     - Nodemon
+    - Husky
+    - Config
 - NPM Scripts:
     - make
     - lint
