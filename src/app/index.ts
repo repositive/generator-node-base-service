@@ -95,6 +95,8 @@ class AppGen extends Generator {
       'tape',
       'tap-spec',
       '@types/tape',
+      'sinon',
+      '@types/sinon',
       'nyc',
       '@repositive/typescript',
       'nodemon',
