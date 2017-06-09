@@ -19,7 +19,7 @@ class AppGen extends Generator {
       }
     ])
       .then((answers) => {
-        this.name = answers.name;
+        this.name = answers.name.split(' ').join('');
         this.description = answers.description;
         this.log(`App Name: ${answers.name}`);
       });
