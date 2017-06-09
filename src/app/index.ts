@@ -29,6 +29,13 @@ class AppGen extends Generator {
     const basePath = `${__dirname}/../../templates`;
 
     this.fs.copyTpl(
+      `${basePath}/README.md`,
+      this.destinationPath('README.md'),
+      {name: this.name, description: this.description}
+    );
+
+
+    this.fs.copyTpl(
       `${basePath}/package.json`,
       this.destinationPath('package.json'),
       {name: this.name, description: this.description}
