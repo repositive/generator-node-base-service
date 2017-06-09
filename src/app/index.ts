@@ -47,6 +47,18 @@ class AppGen extends Generator {
     );
 
     this.fs.copy(
+      this.templatePath(`${basePath}/config/custom-environment-variables.json`),
+      this.destinationPath('config/custom-environment-variables.json'),
+      {}
+    );
+
+    this.fs.copy(
+      this.templatePath(`${basePath}/config/default.json`),
+      this.destinationPath('config/default.json'),
+      {}
+    );
+
+    this.fs.copy(
       this.templatePath(`${basePath}/src/main/index.ts`),
       this.destinationPath('src/main/index.ts'),
       {}
@@ -86,8 +98,13 @@ class AppGen extends Generator {
       'nyc',
       '@repositive/typescript',
       'nodemon',
-      'husky'
+      'husky',
+      '@types/config'
     ], {'save-dev': true});
+
+    this.npmInstall([
+      'config'
+    ], {save: true});
   }
 
   git() {
