@@ -85,7 +85,8 @@ class AppGen extends Generator {
       '@types/tape',
       'nyc',
       '@repositive/typescript',
-      'nodemon'
+      'nodemon',
+      'husky'
     ], {'save-dev': true});
   }
 
