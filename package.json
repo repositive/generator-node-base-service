@@ -1,11 +1,15 @@
 {
-  "name": "@repositive/generator-node-base-service",
+  "name": "@repositive/nb",
   "version": "1.1.0",
-  "description": "",
+  "description": "A node base scaffolding tool",
+  "bin": {
+    "bs": "dist/main/index.js"
+  },
   "scripts": {
     "precommit": "npm run lint",
-    "make": "rm -fr generators && tsc",
-    "lint": "tslint -c tslint.json src/**/*.ts"
+    "make": "rm -fr dist && tsc",
+    "lint": "tslint -c tslint.json src/**/*.ts",
+    "start": "node dist/main/index.js"
   },
   "files": [
     "generators",
@@ -17,16 +21,25 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "yeoman-generator": "^1.1.1"
+    "bluebird": "^3.5.0",
+    "mem-fs": "^1.1.3",
+    "mem-fs-editor": "^3.0.2",
+    "yargs": "^8.0.2"
   },
   "devDependencies": {
     "@repositive/typescript": "^1.1.2",
+    "@types/bluebird": "^3.5.5",
+    "@types/glob": "^5.0.30",
     "@types/node": "^7.0.18",
     "@types/tape": "^4.2.30",
+    "@types/vinyl": "^2.0.0",
+    "@types/yargs": "^6.6.0",
     "@types/yeoman-generator": "^1.0.2",
+    "glob": "^7.1.2",
     "husky": "^0.13.4",
     "tape": "^4.6.3",
     "tslint": "^5.2.0",
-    "typescript": "^2.3.2"
+    "typescript": "^2.3.2",
+    "vinyl": "^2.0.2"
   }
 }
