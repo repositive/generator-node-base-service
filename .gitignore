@@ -1,4 +1,4 @@
 .idea
 .nyc_output
-generators
+dist
 node_modules

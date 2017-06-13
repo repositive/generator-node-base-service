@@ -24,11 +24,11 @@ This is a [yeoman](http://yeoman.io) generator intended provide the basic setup 
 
 **Installing with NPM**
 ```bash
-  $ npm i @repositive/generator-node-base-service
+  npm i @repositive/generator-node-base-service
 ```
 
 **Generating the base service**
 
 ```bash
-    $ yo @repositive/node-base-service
+  yo @repositive/node-base-service
 ```
