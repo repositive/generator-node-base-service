@@ -8,7 +8,7 @@ const readFile = promisify(_readFile);
 import { create } from 'mem-fs';
 import * as fsEditor from 'mem-fs-editor';
 
-const base = `${__dirname}/../../templates`;
+const base = `${__dirname}/../../../templates`;
 
 export async function readTemplates(editor: any) {
   const filePaths = (await glob(`${base}/**/*`, {nodir: true})) as string[];
