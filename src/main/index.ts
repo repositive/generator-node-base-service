@@ -13,7 +13,7 @@ const args = yargs
   .command({
     command: 'generate [mode] [name] [description] [lib]',
     aliases: ['gen'],
-    desc: 'Scaffold a new repositive module',
+    describe: 'Scaffold a new repositive module',
     handler(argv: any) {
       console.log(argv);
     }
@@ -42,7 +42,7 @@ const args = yargs
   })
   .command({
     command: 'show_templates',
-    desc: 'Show the list of templates',
+    describe: 'Show the list of templates',
     handler(arg: any) {
       templates(arg)
         .then(({paths, editor}) => {
