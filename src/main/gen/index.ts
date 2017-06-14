@@ -1,4 +1,5 @@
 
+import * as chalk from 'chalk';
 import { prompt } from 'inquirer';
 import templates from './templates';
 
@@ -23,37 +24,41 @@ function builder(yargs: any) {
     .argv;
 }
 
+
 async function _handler(args: any): Promise<void> {
 
   const {noprompt, verbose, mode, name, description} = args;
 
-  if (!noprompt) {
-    const responses = await prompt([
-      {
-        type : 'confirm',
-        name: 'valid_args',
-        default: true,
-        message: `
+  async function confirmPrompt(p_name: string, message: string, def: boolean = true) {
+    if (!noprompt) {
+      const responses = await prompt([{
+        message,
+        name: p_name,
+        default: def,
+        type: 'confirm'
+      }]);
+
+      debugger;
+      if (!responses[p_name]) {
+        return Promise.reject(new Error('Cancelled by user'));
+      }
+    }
+  }
+
+  await confirmPrompt('confirm_args', `
   Provided data:
     mode: ${mode}
     name: ${name}
     description: ${description || '<no description>'}
 
   Continue?
-        `
-      }
-    ]);
-
-    if (!responses.valid_args) {
-      return Promise.reject('Canceled by user');
-    }
-  }
+  `);
 
   const {paths, editor} = await templates(args);
 
   if (verbose) {
     Object.keys(paths).forEach(k => {
-      console.log(`Creating: ${k}`);
+      console.log(`${chalk.green('Creating:')} ${k}`);
     });
   }
 
@@ -63,7 +68,13 @@ async function _handler(args: any): Promise<void> {
 function handler(args: any) {
   _handler(args)
     .then(() => console.log('Done!'))
-    .catch(console.error);
+    .catch((err) => {
+      if (err.message) {
+        console.error(`${chalk.red('Error: ')} ${err.message}`);
+      } else {
+        console.error(err);
+      }
+    });
 }
 
 export default {
