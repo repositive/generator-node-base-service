@@ -2,6 +2,7 @@
 import * as chalk from 'chalk';
 import { prompt } from 'inquirer';
 import templates from './templates';
+import {gitInit} from './git';
 
 function builder(yargs: any) {
   return yargs
@@ -63,6 +64,8 @@ async function _handler(args: any): Promise<void> {
   }
 
   await editor.commitAsync();
+
+  await gitInit();
 }
 
 function handler(args: any) {
