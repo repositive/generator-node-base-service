@@ -1,4 +1,5 @@
 
+import { prompt } from 'inquirer';
 import templates from './templates';
 
 function builder(yargs: any) {
@@ -22,15 +23,47 @@ function builder(yargs: any) {
     .argv;
 }
 
-function handler(args: any) {
-  templates(args).then(({paths, editor}) => {
+async function _handler(args: any): Promise<void> {
+
+  const {noprompt, verbose, mode, name, description} = args;
+
+  if (!noprompt) {
+    const responses = await prompt([
+      {
+        type : 'confirm',
+        name: 'valid_args',
+        default: true,
+        message: `
+  Provided data:
+    mode: ${mode}
+    name: ${name}
+    description: ${description || '<no description>'}
+
+  Continue?
+        `
+      }
+    ]);
+
+    if (!responses.valid_args) {
+      return Promise.reject('Canceled by user');
+    }
+  }
+
+  const {paths, editor} = await templates(args);
+
+  if (verbose) {
     Object.keys(paths).forEach(k => {
       console.log(`Creating: ${k}`);
     });
-    editor.commitAsync().then(()=> {
-      console.log('Done!');
-    }).catch(console.error);
-  });
+  }
+
+  await editor.commitAsync();
+}
+
+function handler(args: any) {
+  _handler(args)
+    .then(() => console.log('Done!'))
+    .catch(console.error);
 }
 
 export default {
