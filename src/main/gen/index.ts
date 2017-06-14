@@ -24,7 +24,12 @@ function builder(yargs: any) {
 
 function handler(args: any) {
   templates(args).then(({paths, editor}) => {
-    console.log(paths);
+    Object.keys(paths).forEach(k => {
+      console.log(`Creating: ${k}`);
+    });
+    editor.commitAsync().then(()=> {
+      console.log('Done!');
+    }).catch(console.error);
   });
 }
 
