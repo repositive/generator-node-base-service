@@ -11,7 +11,7 @@ import * as fsEditor from 'mem-fs-editor';
 const base = `${__dirname}/../../../templates`;
 
 export async function readTemplates(editor: any) {
-  const filePaths = (await glob(`${base}/**/*`, {nodir: true})) as string[];
+  const filePaths = (await glob(`${base}/**/*`, {nodir: true, dot: true})) as string[];
   const files = await all(filePaths.map((f) => {
     return readFile(f).then(content => {
       return content;
