@@ -7,7 +7,7 @@
     "prepush": "npm run test && npm run coverage",
     "precommit": "npm run lint",
     "start": "node dist/main",
-    "startDev": "nodemon --watch src/main --watch package.json -e ts,json -q -x 'rm -fr dist && echo \"\\n============\\nCOMPILING...\\n============\\n\\n\" && tsc --outDir dist || return 0 && node --debug dist/main/index.js'",
+    "startDev": "nodemon --watch src/main --watch package.json -e ts,json -q -x 'rm -fr dist && echo \"\\n============\\nCOMPILING...\\n============\\n\\n\" && tsc --outDir dist || return 0 && node dist/main/index.js'",
     "make": "rm -fr dist && tsc",
     "lint": "tslint -c tslint.json src/**/*.ts",
     "test": "nyc tape $(find dist -name '*.js' ! -name 'index.js') | tap-spec",
