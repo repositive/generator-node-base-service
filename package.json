@@ -12,7 +12,7 @@
     "start": "node dist/main/index.js"
   },
   "files": [
-    "generators",
+    "dist",
     "templates"
   ],
   "author": "",
@@ -44,7 +44,7 @@
     "@types/yeoman-generator": "^1.0.2",
     "husky": "^0.13.4",
     "tape": "^4.6.3",
-    "tslint": "^5.2.0",
-    "typescript": "^2.3.2"
+    "tslint": "^4.5.1",
+    "typescript": "^2.3.4"
   }
 }

@@ -3,7 +3,7 @@
 import * as yargs from 'yargs';
 import generate from './gen';
 
-const args = yargs
+yargs
   .strict()
   .demandCommand(1, 1, 'You need to specify a command', 'You can\'t specify more than a single command')
   .version()
