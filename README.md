@@ -1,4 +1,4 @@
-## node-base-service
+## rps
 
 This is a [yeoman](http://yeoman.io) generator intended provide the basic setup for a new microservice.
 
@@ -24,11 +24,12 @@ This is a [yeoman](http://yeoman.io) generator intended provide the basic setup 
 
 **Installing with NPM**
 ```bash
-  npm i @repositive/generator-node-base-service
+  npm i -g @repositive/rps
 ```
 
-**Generating the base service**
+**Available commands:
 
 ```bash
-  yo @repositive/node-base-service
+  rps -h
+  rps gen -h
 ```
