@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "<%= description %>",
   "main": "dist/main/index.js",
+  "types": "dist/main/index.d.ts",
   "scripts": {
     "prepush": "npm run test && npm run coverage",
     "precommit": "npm run lint",
