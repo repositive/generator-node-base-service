@@ -29,6 +29,7 @@ interface TplOptions {
   mode: string;
   name: string;
   description: string;
+  noprompt: boolean;
 }
 
 async function confirmPrompt(p_name: string, message: string, def: boolean = false) {
@@ -58,7 +59,7 @@ interface Log {
   msg: string;
 }
 
-export default async function templates({mode, name, description}: TplOptions) {
+export default async function templates({mode, name, description, noprompt}: TplOptions) {
   const store = create();
   const _editor = fsEditor.create(store);
   const editor = promisifyAll(_editor) as any;
@@ -92,7 +93,7 @@ export default async function templates({mode, name, description}: TplOptions) {
       if (existingHash === templatedHash) {
         ovewrite = false;
         logs.push({type: 'skip', msg: tpl});
-      } else {
+      } else if (!noprompt) {
         ovewrite = await confirmPrompt('confirm_ovewrite', `
           File: "${tpl}" already exists, do you want to ovewrite it?`);
         if (!ovewrite) logs.push({type: 'skip', msg: tpl});
