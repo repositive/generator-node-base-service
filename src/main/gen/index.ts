@@ -40,7 +40,6 @@ async function _handler(args: any): Promise<void> {
         type: 'confirm'
       }]);
 
-      debugger;
       if (!responses[p_name]) {
         return Promise.reject(new Error('Cancelled by user'));
       }
