@@ -7,6 +7,7 @@ const readFile = promisify(_readFile);
 import { create } from 'mem-fs';
 import * as fsEditor from 'mem-fs-editor';
 import { prompt } from 'inquirer';
+import * as crypto from 'crypto';
 
 const base = `${__dirname}/../../../templates`;
 
@@ -58,7 +59,7 @@ export default async function templates({mode, name, description}: TplOptions) {
   const editor = promisifyAll(_editor) as any;
 
   const paths = await readTemplates(editor);
-
+  const msgs: string[] = ['-------------------------------'];
   const pathMap = paths.reduce((acc, p) => {
     const templatePath = p.split('/templates/')[1];
     const category = templatePath.split('/')[0];
@@ -77,13 +78,26 @@ export default async function templates({mode, name, description}: TplOptions) {
   const tplProcessor = async function tplProcessor (tpl: any) {
     let ovewrite = true;
     if (editor.exists(`${current_path}/${tpl}`)) {
-      ovewrite = await confirmPrompt('confirm_ovewrite', `
-        File: "${tpl}" already exists, do you want to ovewrite it?`);
+      editor.copyTpl(required_templates[tpl], `tmp/${tpl}`, {name, description});
+      const existing = editor.read(`${current_path}/${tpl}`);
+      const existingHash = crypto.createHash('md5').update(existing).digest('hex');
+      const templated = editor.read(`tmp/${tpl}`);
+      const templatedHash = crypto.createHash('md5').update(templated).digest('hex');
+
+      if (existingHash === templatedHash) {
+        ovewrite = false;
+        msgs.push(`Ignored: ${tpl}`);
+      } else {
+        ovewrite = await confirmPrompt('confirm_ovewrite', `
+          File: "${tpl}" already exists, do you want to ovewrite it?`);
+        msgs.push(`Ovewriten: ${tpl}`);
+      }
+      editor.delete(`tmp/${tpl}`);
     }
     if (ovewrite) editor.copyTpl(required_templates[tpl], `${current_path}/${tpl}`, {name, description});
   };
 
   await applyPromise(Object.keys(required_templates), tplProcessor);
 
-  return {paths: required_templates, editor};
+  return {paths: required_templates, editor, msgs};
 }

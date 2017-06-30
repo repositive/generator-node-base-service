@@ -55,11 +55,14 @@ async function _handler(args: any): Promise<void> {
   Continue?
   `);
 
-  const {paths, editor} = await templates(args);
+  const {paths, editor, msgs} = await templates(args);
 
   if (verbose) {
     Object.keys(paths).forEach(k => {
       console.log(`${chalk.green('Creating:')} ${k}`);
+    });
+    msgs.forEach(msg => {
+      console.log(`${chalk.green('Message:')} ${msg}`);
     });
   }
 
