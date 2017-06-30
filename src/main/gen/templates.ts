@@ -53,13 +53,18 @@ async function applyPromise<O, T>(entries: O[], f: (o: O) => Promise<T>, acc: T[
   }
 }
 
+interface Log {
+  type: string;
+  msg: string;
+}
+
 export default async function templates({mode, name, description}: TplOptions) {
   const store = create();
   const _editor = fsEditor.create(store);
   const editor = promisifyAll(_editor) as any;
 
   const paths = await readTemplates(editor);
-  const msgs: string[] = ['-------------------------------'];
+  const logs: Log[] = [{type: 'info', msg: 'Generating templates:'}];
   const pathMap = paths.reduce((acc, p) => {
     const templatePath = p.split('/templates/')[1];
     const category = templatePath.split('/')[0];
@@ -86,18 +91,21 @@ export default async function templates({mode, name, description}: TplOptions) {
 
       if (existingHash === templatedHash) {
         ovewrite = false;
-        msgs.push(`Ignored: ${tpl}`);
+        logs.push({type: 'skip', msg: tpl});
       } else {
         ovewrite = await confirmPrompt('confirm_ovewrite', `
           File: "${tpl}" already exists, do you want to ovewrite it?`);
-        msgs.push(`Ovewriten: ${tpl}`);
+        if (!ovewrite) logs.push({type: 'skip', msg: tpl});
       }
       editor.delete(`tmp/${tpl}`);
     }
-    if (ovewrite) editor.copyTpl(required_templates[tpl], `${current_path}/${tpl}`, {name, description});
+    if (ovewrite) {
+      logs.push({type: 'new', msg: tpl});
+      editor.copyTpl(required_templates[tpl], `${current_path}/${tpl}`, {name, description});
+    }
   };
 
   await applyPromise(Object.keys(required_templates), tplProcessor);
 
-  return {paths: required_templates, editor, msgs};
+  return {logs, editor};
 }
