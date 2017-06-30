@@ -3,7 +3,7 @@
   "version": "2.0.3",
   "description": "A node base scaffolding tool",
   "bin": {
-    "rps": "dist/main/index.js"
+    "rps": "rps.sh"
   },
   "scripts": {
     "precommit": "npm run lint",
