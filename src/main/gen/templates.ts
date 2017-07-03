@@ -82,7 +82,7 @@ export default async function templates({mode, name, description, noprompt}: Tpl
   const current_path = process.cwd();
 
   const tplProcessor = async function tplProcessor (tpl: any) {
-    let ovewrite = true;
+    let overwrite = true;
     if (editor.exists(`${current_path}/${tpl}`)) {
       editor.copyTpl(required_templates[tpl], `tmp/${tpl}`, {name, description});
       const existing = editor.read(`${current_path}/${tpl}`);
@@ -91,16 +91,16 @@ export default async function templates({mode, name, description, noprompt}: Tpl
       const templatedHash = crypto.createHash('md5').update(templated).digest('hex');
 
       if (existingHash === templatedHash) {
-        ovewrite = false;
+        overwrite = false;
         logs.push({type: 'skip', msg: tpl});
       } else if (!noprompt) {
-        ovewrite = await confirmPrompt('confirm_ovewrite', `
-          File: "${tpl}" already exists, do you want to ovewrite it?`);
-        if (!ovewrite) logs.push({type: 'skip', msg: tpl});
+        overwrite = await confirmPrompt('confirm_overwrite', `
+          File: "${tpl}" already exists, do you want to overwrite it?`);
+        if (!overwrite) logs.push({type: 'skip', msg: tpl});
       }
       editor.delete(`tmp/${tpl}`);
     }
-    if (ovewrite) {
+    if (overwrite) {
       logs.push({type: 'new', msg: tpl});
       editor.copyTpl(required_templates[tpl], `${current_path}/${tpl}`, {name, description});
     }
