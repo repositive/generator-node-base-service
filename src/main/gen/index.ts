@@ -40,7 +40,6 @@ async function _handler(args: any): Promise<void> {
         type: 'confirm'
       }]);
 
-      debugger;
       if (!responses[p_name]) {
         return Promise.reject(new Error('Cancelled by user'));
       }
@@ -56,11 +55,19 @@ async function _handler(args: any): Promise<void> {
   Continue?
   `);
 
-  const {paths, editor} = await templates(args);
+  const {logs, editor} = await templates(args);
 
   if (verbose) {
-    Object.keys(paths).forEach(k => {
-      console.log(`${chalk.green('Creating:')} ${k}`);
+    logs.forEach(log => {
+      if (log.type === 'info') {
+        console.log(`${chalk.blue('Info:')} ${log.msg}`);
+      }
+      if (log.type === 'new') {
+        console.log(`${chalk.green('Creating:')} ${log.msg}`);
+      }
+      if (log.type === 'skip') {
+        console.log(`${chalk.yellow('Skipping:')} ${log.msg}`);
+      }
     });
   }
 
