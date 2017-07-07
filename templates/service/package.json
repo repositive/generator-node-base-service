@@ -1,0 +1,37 @@
+{
+  "name": "<%= name %>",
+  "version": "0.0.1",
+  "description": "<%= description %>",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "precommit": "npm run lint",
+    "start": "node dist/main",
+    "startDev": "nodemon --watch src/main --watch package.json -e ts,json -q -x 'rm -fr dist && echo \"\\n============\\nCOMPILING...\\n============\\n\\n\" && tsc --outDir dist || return 0 && node dist/main/index.js'",
+    "make": "rm -fr dist && tsc",
+    "lint": "tslint -c tslint.json src/**/*.ts",
+    "test": "nyc --reporter lcov tape $(find dist -name '*.spec.js' ! -name 'index.js') | tap-spec",
+    "coverage": "nyc check-coverage --lines 80 --functions 80 --branches 80"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.spec.js",
+      "**/*.d.ts"
+    ]
+  },
+  "author": "Repositive Team",
+  "license": "MIT",
+  "keywords": ["<%= name %>", "service"],
+  "dependencies": {
+    "@repositive/iris": "^0.1.0",
+    "amqplib": "^0.5.1"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.5.3"
+  }
+}
