@@ -13,7 +13,8 @@
   },
   "files": [
     "dist",
-    "templates"
+    "templates",
+    "rps.sh"
   ],
   "author": "",
   "license": "MIT",
