@@ -20,8 +20,8 @@ function builder(yargs: any) {
     })
     .option('mode', {
       describe: 'What are you generating?',
-      default: 'service',
-      choices: ['lib', 'service']
+      default: 'iris',
+      choices: ['lib', 'api', 'iris']
     })
     .argv;
 }

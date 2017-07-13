@@ -2,10 +2,13 @@ import { install } from 'npm-programmatic';
 
 export const dependencies = {
   dev: {
-    service: [
+    api: [
       '@types/hapi',
       '@types/config',
       '@types/bluebird'
+    ],
+    iris: [
+      '@types/config'
     ],
     lib: [],
     common: [
@@ -26,11 +29,15 @@ export const dependencies = {
     ]
   },
   main: {
-    service: [
+    api: [
       'hapi',
       '@repositive/hapi-route-loader',
       'config',
       'bluebird'
+    ],
+    iris: [
+      'config',
+      '@repositive/iris'
     ],
     lib: [],
     common: []
