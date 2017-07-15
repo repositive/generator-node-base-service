@@ -4,10 +4,10 @@ import { stub } from 'sinon';
 import init from './service';
 
 test('Testing basic service', (t: Test) => {
-  async function test() {
+  async function _test() {
 
     const _pack = {version: '1'};
-    const _iris = {act: stub() as any, add: stub().returns(Promise.resolve()) as any};
+    const _iris = {request: stub() as any, register: stub().returns(Promise.resolve()) as any};
     const _irisSetup = stub().returns(Promise.resolve(_iris));
     const irisConfig = {url: 'a', exchange: 'b', namespace: 'c'};
     const _config = { get: stub().returns(irisConfig) } as any;
@@ -26,15 +26,15 @@ test('Testing basic service', (t: Test) => {
         t.notOk(true, 'Setup should not blow up at this point');
       });
 
-    t.ok(_iris.add.called, 'Add from iris is called');
+    t.ok(_iris.register.called, 'Add from iris is called');
 
-    const addCall = _iris.add.getCall(0);
+    const addCall = _iris.register.getCall(0);
 
     t.equal(addCall.args[0].pattern, 'status.<%= name %>', 'The service exposes a status handle');
 
-    const statusImp = addCall.args[0].implementation;
+    const statusImp = addCall.args[0].handler;
 
-    const impResultP = statusImp();
+    const impResultP = statusImp({});
 
     t.ok(impResultP instanceof Promise, 'The implementation of status returns a promise');
 
@@ -48,7 +48,7 @@ test('Testing basic service', (t: Test) => {
       });
   }
 
-  test()
+  _test()
     .then(() => t.end())
     .catch(console.error);
 });
