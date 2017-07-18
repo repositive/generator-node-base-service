@@ -1,5 +1,6 @@
 {
   "iris": {
+    "uri": "amqp://guest:guest@rabbit",
     "namespace": "<%= name %>"
   }
 }
