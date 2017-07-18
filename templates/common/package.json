@@ -28,10 +28,7 @@
   "license": "MIT",
   "keywords": ["<%= name %>", "service"],
   "dependencies": {
-    "@repositive/iris": "^0.1.0",
-    "amqplib": "^0.5.1"
   },
   "devDependencies": {
-    "@types/amqplib": "^0.5.3"
   }
 }
