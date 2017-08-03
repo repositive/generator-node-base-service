@@ -17,7 +17,7 @@ export default async function init({
 
   const iris = await _irisSetup(irisOpts);
 
-  iris.register({pattern: 'info', async handler(msg: any) {
+  iris.register({pattern: `status.${irisOpts.namespace}`, async handler(msg: any) {
     return {
       name: _pack.name,
       version: _pack.version
